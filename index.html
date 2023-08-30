@@ -4,8 +4,34 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width,initial-scale=1.0">
         <link rel="stylesheet" href="styles.css">
-        <title> Molecular Mass Calculator </title>
+        <title> Molar Mass Calculator </title>
     </head>
     <body>
+        <div class="calculator">
+            <h1>Molar Mass Calculator</h1>
+            <label>Chemical Formula:</label>
+            <input type="text" id="formula" placeholder="Example: NaCl">
+            <button id="calculate">Calculate</button>
+        </div>
+        <div id="results">
+            <h2>Results</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th># of Atoms</th>
+                        <th>Name of Atom</th>
+                        <th>MM of Element</th>
+                    </tr>
+                </thead>
+                <tbody id="resultTableBody"></tbody>
+                <tfoot>
+                    <tr>
+                        <td>Total Mocelular Weight:</td>
+                        <td id="totalMolarMass">0.00 g/mol</td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+        <script src="script.js"></script>
     </body>
 </html>
