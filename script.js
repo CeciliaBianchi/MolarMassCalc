@@ -118,7 +118,9 @@ document.getElementById('calculate').addEventListener('click', function () {
     const formula = document.getElementById('formula').value;
     const molarMass = calculateMolarMass(formula);
 
-    document.getElementById('totalMolarMass').textContent = `${molarMass.toFixed(2)} g/mol`;
+    const totalMolarMassElement = document.getElementById('totalMolarMass');
+    totalMolarMassElement.textContent = `Total Molecular Weight: ${molarMass.toFixed(2)} g/mol`;
+
 
     const resultTableBody = document.getElementById('resultTableBody');
     resultTableBody.innerHTML = '';
@@ -168,7 +170,7 @@ function calculateMolarMass(formula) {
 
     // Calculate the molar mass based on atomic masses
     for (const char of formula) {
-        if (char.match(/[A-Za-z]/)) {
+        if (char.match(/[A-Z]/)) {
             if (currentElement !== '') {
                 mass += atomicMasses[currentElement] * (count === '' ? 1 : parseInt(count));
             }
@@ -179,6 +181,7 @@ function calculateMolarMass(formula) {
         } else if (char.match(/[0-9]/)) {
             count += char;
         }
+        console.log(`char: ${char}, currentElement: ${currentElement}, count: ${count}, mass: ${mass}`);
     }
 
     mass += atomicMasses[currentElement] * (count === '' ? 1 : parseInt(count));
