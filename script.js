@@ -110,7 +110,7 @@ const atomicMasses = {
     'Mc': 288,
     'Lv': 293,
     'Ts': 294,
-    'Og': 294
+    'Og': 294,
 };
 
 document.getElementById('calculate').addEventListener('click', function () {
@@ -123,16 +123,27 @@ document.getElementById('calculate').addEventListener('click', function () {
     const resultTableBody = document.getElementById('resultTableBody');
     resultTableBody.innerHTML = '';
 
-    for (const elementSymbol in atomicMasses) {
-        const elementMass = atomicMasses[elementSymbol];
-        const row = resultTableBody.insertRow();
-        const countCell = row.insertCell(0);
-        const nameCell = row.insertCell(1);
-        const massCell = row.insertCell(2);
+    // Track used elements
+    const usedElements = {};
 
-        countCell.textContent = formula.split(elementSymbol).length - 1;
-        nameCell.textContent = elementSymbol;
-        massCell.textContent = elementMass.toFixed(2);
+    for (const char of formula) {
+        if (char.match(/[A-Z][a-z]?/)){
+            usedElements[char] = true;
+        }
+    }
+
+    for (const elementSymbol in usedElements) {
+        if (atomicMasses.hasOwnProperty(elementSymbol)){
+            const elementMass = atomicMasses[elementSymbol];
+            const row = resultTableBody.insertRow();
+            const countCell = row.insertCell(0);
+            const nameCell = row.insertCell(1);
+            const massCell = row.insertCell(2);
+
+            countCell.textContent = formula.split(elementSymbol).length - 1;
+            nameCell.textContent = elementSymbol;
+            massCell.textContent = elementMass.toFixed(2);
+        }
     }
 });
 
