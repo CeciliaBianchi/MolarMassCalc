@@ -126,10 +126,24 @@ document.getElementById('calculate').addEventListener('click', function () {
     // Track used elements
     const usedElements = {};
 
+    let elementSymbol = '';
     for (const char of formula) {
-        if (char.match(/[A-Z][a-z]?/)){
-            usedElements[char] = true;
+        if (char.match(/[A-Z]/)){
+            if (elementSymbol !== '') {
+                usedElements[elementSymbol] = true;
+            }
+            elementSymbol = char;
+        } else if (char.match(/[a-z]/)) {
+            elementSymbol += char;
+        } else if (char.match(/[0-9]/)) {
+            if (elementSymbol !== '') {
+                usedElements[elementSymbol] = true;
+            }
+            elementSymbol = '';
         }
+    }
+    if (elementSymbol !== '') {
+        usedElements[elementSymbol] = true;
     }
 
     for (const elementSymbol in usedElements) {
